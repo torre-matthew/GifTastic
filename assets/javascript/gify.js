@@ -21,6 +21,7 @@ let buttonDisplay = [
 ];
 
 let button;
+let buttonColorCount = 0;
 
 
 function initialExperience () {
@@ -38,8 +39,9 @@ function initialExperience () {
         }
 }
 
-$(".add-new").on("click", function(){
+$(".add-new").on("click", function(event){
     event.preventDefault();
+
  let newEntry = $(".form-control").val().trim();
  
  console.log(newEntry); 
@@ -48,7 +50,15 @@ $(".add-new").on("click", function(){
 
  console.log(movie);
 
- initialExperience();
+
+
+buttonDisplay.push(buttonDisplay[buttonColorCount]);
+ 
+buttonColorCount++;
+
+initialExperience();
+
+ $(".form-control").val(""); 
 
 
 });
