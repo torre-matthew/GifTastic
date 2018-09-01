@@ -72,8 +72,10 @@ $("body").on("click", ".call-api", function(event){
     let buttonVal = $(this).attr("data-typed");
         console.log(buttonVal);
 
-    let queryURL = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=FzsstZRyKhIEJZWO56UXiJBmy3IzbvXc&limit=5";
+    let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonVal + "&api_key=FzsstZRyKhIEJZWO56UXiJBmy3IzbvXc&limit=10";
     
+    $(".gify-area").empty();
+
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -81,7 +83,26 @@ $("body").on("click", ".call-api", function(event){
             let responseData = response.data;
                 console.log(responseData);
 
-        });
+        for (i = 0; i < 10; i++) {
+            let animatedGify = responseData[i].images.fixed_height_small.url;
+                console.log(animatedGify);
+            let stillGify = responseData[i].images.original_still.url;
+            let gifyRating = responseData[i].rating;
+            
+            
+
+            let gifyDiv = $("<div>")
+                        .addClass("gify");
+            
+            let gifyImg = $("<img>")
+                        .attr("src", animatedGify);
+
+             gifyDiv.append(gifyImg);
+        
+             $(".gify-area").append(gifyDiv);
+        }
+        
+    });
 
 });
 
