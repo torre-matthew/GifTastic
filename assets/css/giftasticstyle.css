@@ -1,7 +1,29 @@
+body {
+    background: url("../images/concrete_wall.png") repeat;
+}
+
+
 .container-fluid {
     margin-top: 30px;
 }
 
 .btn-sm {
     margin: 5px;
+}
+
+.gify-image {
+    padding: 5px;
+    float: left;
+    height: 100px;
+    width: 200px;
+}
+
+.poster-area {
+    padding: 0;
+}
+
+.poster-image {
+    height: 495px;
+    width: 300px;
+
 }

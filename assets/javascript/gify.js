@@ -1,10 +1,11 @@
+//======================Global Variables======================================================================
 
 let movie = [
     "In Bruges",
     "Snatch",
     "Pulp Fiction",
     "I Saw the Devil",
-    "Jurrasic Park",
+    "Jurassic Park",
     "Slumdog Millionaire",
     "Bad Boys",
 ];
@@ -21,6 +22,12 @@ let buttonDisplay = [
 
 let button;
 let buttonColorCount = 0;
+let buttonVal;
+let state;
+let animatedGify;
+let stillGify;
+
+//====================== Functions ======================================================================
 
 // Funtion for creating buttons dynamically based on the values in an array.
 function initialExperience () {
@@ -37,6 +44,92 @@ function initialExperience () {
             $(".buttons").append(button);
         }
 }
+
+
+function callApiDisplayGifys () {
+    
+        console.log(buttonVal);
+
+    let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonVal + "&api_key=FzsstZRyKhIEJZWO56UXiJBmy3IzbvXc&limit=10";
+    
+    
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+            let responseData = response.data;
+                console.log(responseData);
+
+        for (i = 0; i < 10; i++) {
+        animatedGify = responseData[i].images.original.url;
+        stillGify = responseData[i].images.original_still.url;
+        gifyRating = responseData[i].rating;
+        
+        
+
+            let gifyDiv = $("<div>")
+                        .addClass("gify");
+            
+            let gifyImg = $("<img>")
+                        .attr("src", stillGify)
+                        .attr("data-still", stillGify)
+                        .attr("data-animate", animatedGify)
+                        .attr("data-img-state", "still")
+                        .addClass("gify-image");
+
+                gifyDiv.append(gifyImg);
+                
+                if (i === 0 || i === 1 || i === 2 || i === 3 || i === 4) {
+                    $(".gify-area1").prepend(gifyDiv);    
+                }else {
+                    $(".gify-area2").prepend(gifyDiv);
+                }    
+        }   
+    });
+}
+
+function callOmdbApi () {
+
+    console.log(buttonVal);
+
+    let queryURL = "http://www.omdbapi.com/?t=" + buttonVal + "&apikey=265b0607";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+            let responseData = response;
+                console.log(responseData);
+
+            let posterDiv = $("<div>");
+            
+            let posterImg = $("<img>")
+                        .attr("src", response.Poster)
+                        .addClass("poster-image");
+
+                posterDiv.append(posterImg);
+
+        $(".poster-area").prepend(posterDiv);
+});
+
+}
+
+
+//====================== Handlers/Calls ======================================================================
+
+
+initialExperience();
+
+// Click handler for reaching out to the API once a button is clicked
+$("body").on("click", ".call-api", function(event){
+    buttonVal = $(this).attr("data-typed");
+    
+    // $(".gify-area1").empty();
+
+    callApiDisplayGifys();
+    callOmdbApi();
+
+});
 
 // Click handler for adding a new entry to the list of buttons.
 $(".add-new").on("click", function(event){
@@ -67,46 +160,17 @@ $(".add-new").on("click", function(event){
 
 });
 
-// Click handler for reaching out to the API once a button is clicked
-$("body").on("click", ".call-api", function(event){
-    let buttonVal = $(this).attr("data-typed");
-        console.log(buttonVal);
-
-    let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonVal + "&api_key=FzsstZRyKhIEJZWO56UXiJBmy3IzbvXc&limit=10";
-    
-    $(".gify-area").empty();
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response){
-            let responseData = response.data;
-                console.log(responseData);
-
-        for (i = 0; i < 10; i++) {
-            let animatedGify = responseData[i].images.fixed_height_small.url;
-                console.log(animatedGify);
-            let stillGify = responseData[i].images.original_still.url;
-            let gifyRating = responseData[i].rating;
-            
-            
-
-            let gifyDiv = $("<div>")
-                        .addClass("gify");
-            
-            let gifyImg = $("<img>")
-                        .attr("src", animatedGify);
-
-             gifyDiv.append(gifyImg);
-        
-             $(".gify-area").append(gifyDiv);
-        }
-        
-    });
-
-});
-
 // Click handler for going from a still gif to an animated one and back
-// Function for creating a button based on value typed in an input
+$("body").on("click", ".gify-image", function (event){
+    state = $(this).attr("data-img-state");
 
-initialExperience();
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-img-state", "animated");
+    
+    }else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-img-state", "still");
+        
+    }
+});
