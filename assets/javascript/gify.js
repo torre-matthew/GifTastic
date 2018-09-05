@@ -59,7 +59,7 @@ function callApiDisplayGifys () {
         // console.log(buttonVal);
         
 
-    let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonVal + "&api_key=FzsstZRyKhIEJZWO56UXiJBmy3IzbvXc&limit=10";
+    let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonVal + "&api_key=FzsstZRyKhIEJZWO56UXiJBmy3IzbvXc&limit=10";
     
     
     $.ajax({
@@ -114,7 +114,7 @@ function callOmdbApi () {
 
     console.log(buttonVal);
 
-    let queryURL = "http://www.omdbapi.com/?t=" + buttonVal + "&apikey=265b0607";
+    let queryURL = "https://www.omdbapi.com/?t=" + buttonVal + "&apikey=265b0607";
 
     $.ajax({
         url: queryURL,
