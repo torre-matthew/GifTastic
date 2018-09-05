@@ -22,8 +22,17 @@ body {
     padding: 0;
 }
 
+.user-poster-area {
+    padding: 0;
+}
+
 .poster-image {
     height: 495px;
     width: 300px;
+    padding-bottom: 10px;
 
+}
+
+input {
+    width: 50%;
 }
