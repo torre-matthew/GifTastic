@@ -1,5 +1,8 @@
 body {
     background: url("../images/concrete_wall.png") repeat;
+    font-family:  'East Sea Dokdo', cursive;
+    font-size: 30px;
+    line-height: 15px;
 }
 
 
@@ -9,6 +12,7 @@ body {
 
 .btn-sm {
     margin: 5px;
+    font-size: 20px;
 }
 
 .gify-image {
@@ -27,12 +31,18 @@ body {
 }
 
 .poster-image {
-    height: 495px;
+    height: 560px;
     width: 300px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 
 }
 
 input {
     width: 50%;
+}
+
+.gify-rating {
+    font-size: 20px;
+    color: aliceblue;
+    margin: 0;
 }
