@@ -4,8 +4,8 @@ let movie = [
     "The Witch",
     "The Babadook",
     "Let the Right One In",
-    "It",
-    "Blair Witch",
+    "The Exorcist",
+    "The Blair Witch Project",
     "Paranormal Activity",
     "28 Days Later",
 ];
