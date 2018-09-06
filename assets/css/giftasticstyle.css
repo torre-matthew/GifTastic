@@ -52,4 +52,22 @@ input {
     text-align: center;
     margin: 0;
     padding: 0;
+    color: lightcyan;
+}
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: lightcyan;
+}
+
+.intro {
+    font-size: 25px;
+    color: coral;
+    text-align: center;
+}
+
+.card {
+    background-color: transparent;
+    border-bottom: solid coral 1px;
 }
